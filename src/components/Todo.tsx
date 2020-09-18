@@ -1,23 +1,27 @@
 import React from "react";
-
-interface Todo {
-  name: string;
-  done: boolean;
-}
+import typeTodo from "../models/typeTodo";
 
 interface Todos {
-  data: Array<Todo>;
+  data: Array<typeTodo>;
 }
 
 export const Todo: React.FC<Todos> = ({ data }) => {
   return (
     <div>
       <ol>
-        {data.map((val) => {
+        {data.map((val, index) => {
           return (
-            <li>
+            <li key={index} className={`${val.done ? "done" : ""} `}>
               <span>{val.name}</span>
               <span>{val.done}</span>
+              <button
+                onClick={() => {
+                  val.done = true;
+                  console.log(val.done);
+                }}
+              >
+                Done
+              </button>
             </li>
           );
         })}
