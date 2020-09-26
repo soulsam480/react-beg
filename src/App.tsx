@@ -1,26 +1,20 @@
-import React, { useState } from "react";
-import "./App.css";
-import { AddTodo } from "./components/AddTodo";
-import { Header } from "./components/Header";
-import { Todo } from "./components/Todo";
-import typeTodo from "./models/typeTodo";
-function App() {
-  const [todos, setTodos] = useState<typeTodo[]>([]);
-  const addTodos = (todo: typeTodo) => {
-    console.log(todo);
-    setTodos([...todos, todo]);
-  };
-  /*  const setDone = (id: number) => {
-    setTodos(todos.slice()[id].done = true)
-  }; */
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Fof from "./views/Fof";
+import Home from "./views/Home";
+import Post from "./views/Post";
+interface Props {}
 
+const App: React.FC<Props> = () => {
   return (
-    <div>
-      <Header />
-      <Todo data={todos}></Todo>
-      <AddTodo giveTodo={addTodos} />
+    <div className="container">
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route exact path="/post/:_slug" component={Post}></Route>
+        <Route path="*" component={Fof}></Route>
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
